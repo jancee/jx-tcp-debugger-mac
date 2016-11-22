@@ -1,0 +1,6 @@
+framework module Pods_JanceeTCPDebuggerTool {
+  umbrella header "Pods-JanceeTCPDebuggerTool-umbrella.h"
+
+  export *
+  module * { export * }
+}
