@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSTimer *repeatTimer;
 
 @property (nonatomic, strong) NSArray *connectHistoryArray;
+@property (nonatomic, strong) NSArray *sendDataHistoryArray;
 
 @end
 
@@ -41,8 +42,13 @@
     
     //显示历史连接
     self.connectHistoryArray = [SpModel getConnectHistory];
-    NSLog(@"找到%@",self.connectHistoryArray);
+    NSLog(@"历史连接：%@",self.connectHistoryArray);
     [self.historyConnectCB reloadData];
+    
+    //显示历史发送
+    self.sendDataHistoryArray = [SpModel getSendDataHistory];
+    NSLog(@"历史发送：%@",self.sendDataHistoryArray);
+    [self.historySendDataCB reloadData];
     
     [RACObserve(self, isConnect) subscribeNext:^(id x) {
       BOOL isConnect = [x boolValue];
@@ -61,6 +67,7 @@
       
       [self resetRepeatTimer];
     }];
+    
     
     
     [self.repeatIntervalTextField.rac_textSignal subscribeNext:^(id x) {
@@ -197,7 +204,21 @@
  发送按钮
  */
 - (IBAction)Send:(id)sender {
-  NSLog(@"%@",[sendmessage stringValue]);
+  if([[sendmessage stringValue] length] == 0)
+    return;
+  
+  self.sendDataHistoryArray = [SpModel getSendDataHistory];
+  BOOL find = NO;
+  for (NSString *forString in self.sendDataHistoryArray) {
+    if([forString isEqualToString:[sendmessage stringValue]]) {
+      find = YES;
+      break;
+    }
+  }
+  if(!find) {
+    [SpModel addSendDataHistoryWithData:[sendmessage stringValue]];
+    [self.historySendDataCB reloadData];
+  }
   [self sendData];
 }
 
@@ -298,21 +319,35 @@ didWriteDataWithTag:(long)t {
 
 #pragma mark - combox delegate
 - (void)comboBoxSelectionDidChange:(NSNotification *)notification {
+  self.connectHistoryArray = [SpModel getConnectHistory];
+  self.sendDataHistoryArray = [SpModel getSendDataHistory];
   if(notification.object == self.historyConnectCB) {
-    self.connectHistoryArray = [SpModel getConnectHistory];
     NSDictionary *getDict = [self.connectHistoryArray objectAtIndex:[self.historyConnectCB indexOfSelectedItem]];
     [ip_address setStringValue:getDict[@"ip"]];
     [port       setStringValue:getDict[@"port"]];
-  } else if(notification.object == self.historySendDataCB) {
+  }
+  else if(notification.object == self.historySendDataCB) {
+    [sendmessage setStringValue:[self.sendDataHistoryArray objectAtIndex:[self.historySendDataCB indexOfSelectedItem]]];
   }
 }
 
 - (id)comboBox:(NSComboBox *)comboBox objectValueForItemAtIndex:(NSInteger)index {
-  NSDictionary *getDict = [self.connectHistoryArray objectAtIndex:index];
-  return [[NSString alloc] initWithFormat:@"%@:%@",getDict[@"ip"],getDict[@"port"]];
+  self.connectHistoryArray = [SpModel getConnectHistory];
+  self.sendDataHistoryArray = [SpModel getSendDataHistory];
+  if(comboBox == self.historyConnectCB) {
+    NSDictionary *getDict = [self.connectHistoryArray objectAtIndex:index];
+    return [[NSString alloc] initWithFormat:@"%@:%@",getDict[@"ip"],getDict[@"port"]];
+  }
+  else {
+    return [self.sendDataHistoryArray objectAtIndex:index];
+  }
 }
 
 - (NSInteger)numberOfItemsInComboBox:(NSComboBox *)comboBox {
-  return [self.connectHistoryArray count];
+  self.connectHistoryArray = [SpModel getConnectHistory];
+  self.sendDataHistoryArray = [SpModel getSendDataHistory];
+  if(comboBox == self.historyConnectCB)
+    return [self.connectHistoryArray count];
+  return [self.sendDataHistoryArray count];
 }
 @end

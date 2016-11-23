@@ -385,7 +385,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
-				PRODUCT_NAME = "王静茜-TCP Debugger";
+				PRODUCT_NAME = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -415,7 +415,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PREBINDING = NO;
-				PRODUCT_NAME = "王静茜-TCP Debugger";
+				PRODUCT_NAME = "";
 				SDKROOT = macosx;
 			};
 			name = Release;

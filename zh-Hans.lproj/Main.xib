@@ -152,11 +152,15 @@
                     <comboBox verticalHuggingPriority="750" misplaced="YES" id="FWM-tH-cSv">
                         <rect key="frame" x="238" y="16" width="492" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="MjK-7w-gak">
+                        <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="MjK-7w-gak">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </comboBoxCell>
+                        <connections>
+                            <outlet property="dataSource" destination="494" id="Api-2R-yXS"/>
+                            <outlet property="delegate" destination="494" id="jd3-EX-SAC"/>
+                        </connections>
                     </comboBox>
                     <box misplaced="YES" title="连接" id="jXd-WT-DAY">
                         <rect key="frame" x="17" y="200" width="216" height="136"/>

@@ -11,6 +11,9 @@
 @interface SpModel : NSObject
 
 + (void)addConnectHistoryWithIp:(NSString*)string port:(NSString*)port;
-+ (NSArray*)getConnectHistory;
++ (NSArray<NSDictionary*>*)getConnectHistory;
+
++ (void)addSendDataHistoryWithData:(NSString*)string;
++ (NSArray<NSString*>*)getSendDataHistory;
 
 @end
