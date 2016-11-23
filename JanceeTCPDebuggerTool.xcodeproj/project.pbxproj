@@ -10,6 +10,9 @@
 		1DDD58160DA1D0A300B32029 /* Main.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* Main.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* AppDelegate.m */; };
 		74E20D8A1DE4328A007565AE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74E20D891DE4328A007565AE /* Images.xcassets */; };
+		74E20D911DE535DA007565AE /* SpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E20D901DE535DA007565AE /* SpModel.m */; };
+		74E20D941DE53B14007565AE /* NSData+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E20D931DE53B14007565AE /* NSData+Hex.m */; };
+		74E20D971DE53B9E007565AE /* NSString+byteLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E20D961DE53B9E007565AE /* NSString+byteLength.m */; };
 		79F8AD9534DC6220A86D6FC4 /* Pods_JanceeTCPDebuggerTool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C768C469B24F351876238F /* Pods_JanceeTCPDebuggerTool.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -30,6 +33,12 @@
 		74E20D891DE4328A007565AE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = SocketTest/Images.xcassets; sourceTree = "<group>"; };
 		74E20D8B1DE43774007565AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		74E20D8C1DE43774007565AE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/Main.xib"; sourceTree = "<group>"; };
+		74E20D8F1DE535DA007565AE /* SpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpModel.h; sourceTree = "<group>"; };
+		74E20D901DE535DA007565AE /* SpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpModel.m; sourceTree = "<group>"; };
+		74E20D921DE53B14007565AE /* NSData+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Hex.h"; sourceTree = "<group>"; };
+		74E20D931DE53B14007565AE /* NSData+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Hex.m"; sourceTree = "<group>"; };
+		74E20D951DE53B9E007565AE /* NSString+byteLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+byteLength.h"; sourceTree = "<group>"; };
+		74E20D961DE53B9E007565AE /* NSString+byteLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+byteLength.m"; sourceTree = "<group>"; };
 		75169B33A9ED44E6BCD9E25C /* Pods-JanceeTCPDebuggerTool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JanceeTCPDebuggerTool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JanceeTCPDebuggerTool/Pods-JanceeTCPDebuggerTool.debug.xcconfig"; sourceTree = "<group>"; };
 		876276ABD345C730196D1602 /* Pods-JanceeTCPDebuggerTool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JanceeTCPDebuggerTool.release.xcconfig"; path = "Pods/Target Support Files/Pods-JanceeTCPDebuggerTool/Pods-JanceeTCPDebuggerTool.release.xcconfig"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* JanceeTCPDebuggerTool-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JanceeTCPDebuggerTool-Info.plist"; sourceTree = "<group>"; };
@@ -54,10 +63,16 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				74E20D951DE53B9E007565AE /* NSString+byteLength.h */,
+				74E20D961DE53B9E007565AE /* NSString+byteLength.m */,
+				74E20D921DE53B14007565AE /* NSData+Hex.h */,
+				74E20D931DE53B14007565AE /* NSData+Hex.m */,
 				BF01F5FF12E030F3006D9C78 /* AsyncSocket.h */,
 				BF01F60012E030F3006D9C78 /* AsyncSocket.m */,
 				256AC3D80F4B6AC300CF3369 /* AppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* AppDelegate.m */,
+				74E20D8F1DE535DA007565AE /* SpModel.h */,
+				74E20D901DE535DA007565AE /* SpModel.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -264,9 +279,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74E20D911DE535DA007565AE /* SpModel.m in Sources */,
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* AppDelegate.m in Sources */,
+				74E20D941DE53B14007565AE /* NSData+Hex.m in Sources */,
 				BF01F60112E030F3006D9C78 /* AsyncSocket.m in Sources */,
+				74E20D971DE53B9E007565AE /* NSString+byteLength.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +385,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
+				PRODUCT_NAME = "王静茜-TCP Debugger";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -396,6 +415,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PREBINDING = NO;
+				PRODUCT_NAME = "王静茜-TCP Debugger";
 				SDKROOT = macosx;
 			};
 			name = Release;

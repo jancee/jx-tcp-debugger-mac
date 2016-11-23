@@ -77,6 +77,8 @@
                 <outlet property="historySendDataCB" destination="FWM-tH-cSv" id="p39-jG-9Ug"/>
                 <outlet property="ip_address" destination="535" id="554"/>
                 <outlet property="port" destination="541" id="556"/>
+                <outlet property="receiveAsciiButton" destination="uwn-mN-qVV" id="AzI-PJ-2os"/>
+                <outlet property="receiveHexButton" destination="i81-m2-teE" id="PIa-m5-wMM"/>
                 <outlet property="receivedmessage" destination="572" id="573"/>
                 <outlet property="repeatIntervalStepper" destination="hvg-R9-Edf" id="UR7-vF-Au5"/>
                 <outlet property="repeatIntervalTextField" destination="pCv-4n-O3f" id="lfc-gR-Lvy"/>
@@ -100,17 +102,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="747" height="414"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" misplaced="YES" id="533">
-                        <rect key="frame" x="672" y="69" width="55" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="squareTextured" title="发送" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="534">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="Send:" target="494" id="566"/>
-                        </connections>
-                    </button>
                     <textField verticalHuggingPriority="750" misplaced="YES" id="562">
                         <rect key="frame" x="238" y="48" width="422" height="84"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -148,7 +139,7 @@
                         </scroller>
                     </scrollView>
                     <button verticalHuggingPriority="750" misplaced="YES" id="574">
-                        <rect key="frame" x="101" y="342" width="50" height="53"/>
+                        <rect key="frame" x="20" y="342" width="50" height="53"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="squareTextured" title="连接" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="575">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -222,18 +213,22 @@
                                 <comboBox verticalHuggingPriority="750" misplaced="YES" id="c72-87-b6Z">
                                     <rect key="frame" x="80" y="23" width="115" height="26"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="idy-jx-d9H">
+                                    <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" usesDataSource="YES" numberOfVisibleItems="5" id="idy-jx-d9H">
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </comboBoxCell>
+                                    <connections>
+                                        <outlet property="dataSource" destination="494" id="cSr-GC-hSb"/>
+                                        <outlet property="delegate" destination="494" id="Zb4-D0-7ve"/>
+                                    </connections>
                                 </comboBox>
                             </subviews>
                         </view>
                         <font key="titleFont" size="14" name=".AppleSystemUIFont"/>
                     </box>
                     <button verticalHuggingPriority="750" misplaced="YES" id="nGc-30-04T">
-                        <rect key="frame" x="159" y="342" width="50" height="53"/>
+                        <rect key="frame" x="78" y="342" width="50" height="53"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="squareTextured" title="断开" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="jDZ-LT-v3m">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -257,6 +252,9 @@
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="sendDataFormatClick:" target="494" id="EsM-5v-PdI"/>
+                                    </connections>
                                 </button>
                                 <button misplaced="YES" id="Vpz-7p-dSQ">
                                     <rect key="frame" x="93" y="56" width="57" height="18"/>
@@ -265,6 +263,9 @@
                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="sendDataFormatClick:" target="494" id="7cz-h2-QFA"/>
+                                    </connections>
                                 </button>
                                 <button misplaced="YES" id="Pcp-or-aqV">
                                     <rect key="frame" x="18" y="33" width="84" height="18"/>
@@ -289,17 +290,23 @@
                                 <textField verticalHuggingPriority="750" misplaced="YES" id="pCv-4n-O3f">
                                     <rect key="frame" x="94" y="31" width="54" height="22"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="0" placeholderString="ms" drawsBackground="YES" id="ce5-yo-IoO">
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="0" placeholderString="ms" drawsBackground="YES" id="ce5-yo-IoO">
                                         <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="IT8-Gc-69l"/>
                                         <font key="font" metaFont="system"/>
                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
+                                    <connections>
+                                        <outlet property="delegate" destination="494" id="4Pb-u7-1UQ"/>
+                                    </connections>
                                 </textField>
                                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" id="hvg-R9-Edf">
                                     <rect key="frame" x="144" y="29" width="19" height="27"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="tQ3-RS-sQG"/>
+                                    <stepperCell key="cell" continuous="YES" enabled="NO" alignment="left" maxValue="100" id="tQ3-RS-sQG"/>
+                                    <connections>
+                                        <action selector="repeatIntervalStepperClick:" target="494" id="mqw-Fv-cNm"/>
+                                    </connections>
                                 </stepper>
                             </subviews>
                         </view>
@@ -350,6 +357,50 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button verticalHuggingPriority="750" misplaced="YES" id="533">
+                        <rect key="frame" x="672" y="46" width="55" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="squareTextured" title="发送" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="534">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="Send:" target="494" id="566"/>
+                        </connections>
+                    </button>
+                    <box misplaced="YES" title="接收显示" id="116-uM-q0m">
+                        <rect key="frame" x="133" y="325" width="100" height="69"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <view key="contentView" id="05Q-yv-dt8">
+                            <rect key="frame" x="2" y="2" width="96" height="48"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button misplaced="YES" id="uwn-mN-qVV">
+                                    <rect key="frame" x="19" y="26" width="57" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="radio" title="ASCII" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="P3g-uY-sae">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="receiveDataFormatClick:" target="494" id="q3F-l8-aW3"/>
+                                    </connections>
+                                </button>
+                                <button misplaced="YES" id="i81-m2-teE">
+                                    <rect key="frame" x="19" y="4" width="57" height="18"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="radio" title="HEX" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="JqV-2t-MXF">
+                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="receiveDataFormatClick:" target="494" id="ubt-yR-XmO"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="14" name=".AppleSystemUIFont"/>
+                    </box>
                 </subviews>
             </view>
             <point key="canvasLocation" x="194.5" y="-259"/>

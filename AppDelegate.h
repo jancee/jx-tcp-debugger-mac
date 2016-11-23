@@ -9,10 +9,21 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AsyncSocket.h"
+#import "NSData+Hex.h"
+#import "NSString+byteLength.h"
 
 @class AsyncSocket;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate> {
+@interface AppDelegate : NSObject
+<
+NSApplicationDelegate,
+NSTextFieldDelegate,
+NSComboBoxDelegate,
+NSComboBoxDataSource,
+NSComboBoxCellDataSource
+>
+
+{
   NSWindow *window;
   AsyncSocket *Socket;
   
@@ -28,6 +39,10 @@
 @property (nonatomic, strong) NSNumber *isConnect;
 
 @property (assign) IBOutlet NSWindow *window;
+
+@property (assign) IBOutlet NSButton *receiveAsciiButton;
+@property (assign) IBOutlet NSButton *receiveHexButton;
+
 
 @property (assign) IBOutlet NSTextField *connectStatusTextField;
 @property (assign) IBOutlet NSComboBox  *historySendDataCB;
